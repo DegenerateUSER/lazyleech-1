@@ -1,7 +1,7 @@
 aiohttp
 aiohttp[speedups]>=3.7.3
 feedparser
-pyrogram
+pyrogram==1.4.16
 tgcrypto
 natsort
 requests

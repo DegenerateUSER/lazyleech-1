@@ -43,9 +43,12 @@ if os.environ.get('DB_URL'):
                 await A.insert_one({'_id': str(da.find('item').find('title')), 'site': i})
         for i in cr:
             for ii in ADMIN_CHATS:
-                msg = await app.send_message(ii, f"New anime uploaded\n\n{i[0]}\n{i[1]}")
-                flags = (ForceDocumentFlag,)
-                await initiate_torrent(app, msg, i[1], flags)
+                try:
+                    msg = await app.send_message(ii, f"New anime uploaded\n\n{i[0]}\n{i[1]}")
+                    flags = (ForceDocumentFlag,)
+                    await initiate_torrent(app, msg, i[1], flags)
+                except:
+                    pass
 
     scheduler = AsyncIOScheduler()
     scheduler.add_job(rss_parser, "interval", minutes=int(os.environ.get('RSS_RECHECK_INTERVAL', 5)), max_instances=5)
