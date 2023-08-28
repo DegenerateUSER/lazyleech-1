@@ -43,7 +43,7 @@ async def aria2_request(session, method, params=None):
     if ARIA2_SECRET:
         params.insert(0, 'token:' + ARIA2_SECRET)
     data = {'jsonrpc': '2.0', 'id': str(time.time()), 'method': method, 'params': params}
-    async with session.post('http://127.0.0.1:6800/jsonrpc', data=json.dumps(data)) as resp:
+    async with session.post('http://127.0.0.1:6834/jsonrpc', data=json.dumps(data)) as resp:
         return await resp.json(encoding='utf-8')
 
 async def aria2_tell_active(session):
